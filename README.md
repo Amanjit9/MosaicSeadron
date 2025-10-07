@@ -151,7 +151,7 @@ In order to perform a complete processing we need our dataset to comprise the fo
   - It is a file used to define flight metadata. 
   - Its main function is to determine which captures will be georeferenced and joined.
  
-## Troubleshooting: 
+## Troubleshooting 
 
 ### Issues installing the “seadron” and “micasense” packages
 (ModuleNotFoundError: No module named 'seadrone')
@@ -165,7 +165,8 @@ In order to perform a complete processing we need our dataset to comprise the fo
 sys.path.append(<repository_directory>)
 
 
-#### Usage
+## Usage
 See: [mono_processing_jupyter/micasense](/seadrone_usage/mono_processing_jupyter/micasense.ipynb) and [batch_processing_jupyter/micasense](/seadrone_usage/batch_processing_jupyter/micasense.ipynb) files
+
 
 
