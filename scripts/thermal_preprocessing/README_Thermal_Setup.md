@@ -35,4 +35,15 @@ Create extract_thermal.py in your master folder. This script strictly uses the n
 Phase 5: Execution
 With your (native_env) active and your Skydio R-JPEGs in the configured input folder, run the script:python extract_thermal.py
 Once the script completes, you can deactivate the native Python environment and return to your primary photogrammetry environment to stitch the resulting TIFFs.
+# The Autopsy: What Failed & Why
+Setting this up requires navigating a perfect storm of deprecated libraries, corrupted binaries, and proprietary SDKs. If you deviate from the installation path, you will likely hit one of these fatal errors:
 
+Conda + Pip Mixing (pyexpat.dll load failure): Anaconda environments are notorious for C-library conflicts. Mixing pip and conda installs forcefully downgraded NumPy, which cascaded and corrupted the core Windows XML parser, effectively bricking the geospatial environment.
+
+FLIR Desktop Software (Paywall): FLIR Thermal Studio Starter was tested as a no-code bypass, but FLIR recently locked the "Batch Export" feature behind a paid Pro license, making it useless for drone mapping mosaics.
+
+The DJI SDK Hijack (Unsupported camera type: VT300-L_40IR): Newer versions of the open-source library (flirimageextractor > 1.5.0) integrated the proprietary DJI Thermal SDK. The DJI C++ code intercepts all images, realizes the Skydio sensor isn't a DJI camera, and instantly throws a fatal error before ExifTool can do its job.
+
+Python 3.12 vs. Legacy Build Tools (ModuleNotFoundError: No module named 'distutils'): Rolling back to version 1.4.1 (the pre-DJI version) failed initially because Python 3.12 permanently deleted distutils. Furthermore, 1.4.1 is hard-coded to demand matplotlib==3.5.3, which cannot compile on modern Python architecture.
+
+Corrupted ExifTool (Could not find ... perl5*.dll): Even with a perfect Python environment, ExifTool can fail to unpack its temporary .dll files due to Windows Defender or corrupted downloads, requiring a manual replacement of the executable.
