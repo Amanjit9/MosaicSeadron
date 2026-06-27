@@ -39,14 +39,17 @@ Download the Windows Executable from exiftool.org.
 
 Extract the .zip file and rename exiftool(-k).exe to exactly exiftool.exe.
 
-Place exiftool.exe directly into your master project folder alongside your Python scripts.
-
+Place exiftool.exe and exiftool_files directly into your master project folder alongside your Python scripts.
+The exiftool_files folder (This contains the heavy Perl engine the launcher needs).
 Troubleshooting Note: If the script throws a perl5*.dll error during execution, delete the hidden exiftool_files folder in your project directory and run the script again to force a clean unpack.
 
 Phase 4: The Extraction Script
 Create extract_thermal.py in your master folder. This script strictly uses the native FLIR extractor and avoids DJI parsing logic.
+Manually install the skipped helper libraries:
+python -m pip install loguru requests opencv-python logzero tqdm
 Phase 5: Execution
-With your (native_env) active and your Skydio R-JPEGs in the configured input folder, run the script:python extract_thermal.py
+With your (native_env) active and your Skydio R-JPEGs in the configured input folder, run the script:
+python extract_thermal.py
 Once the script completes, you can deactivate the native Python environment and return to your primary photogrammetry environment to stitch the resulting TIFFs.
 # The Autopsy: What Failed & Why
 Setting this up requires navigating a perfect storm of deprecated libraries, corrupted binaries, and proprietary SDKs. If you deviate from the installation path, you will likely hit one of these fatal errors:
