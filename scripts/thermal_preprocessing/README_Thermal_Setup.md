@@ -11,14 +11,17 @@ Open the downloaded .exe installer file.
 ⚠️ CRITICAL STEP: At the very bottom of the first installation window, check the box that says "Add python.exe to PATH". If you miss this box, Windows will continue to say "Python was not found."
 
 Click Install Now.
-Open Git bash
+Open Git bash OR if it is Powershell
 # 1. Deactivate conda completely until (base) disappears from your terminal prompt
 conda deactivate
 # 2. Create a native Windows Python virtual environment
 python -m venv native_env
 
 # 3. Activate the environment
+if it is Powershell
 .\native_env\Scripts\activate
+ or Git Bash
+source native_env/Scripts/activate
 
 Phase 2: The Dependency Smuggle
 We must install modern libraries first, then force-install the legacy FLIR library while explicitly commanding it to ignore its own broken dependency rules.
