@@ -1,9 +1,19 @@
 Phase 1: Environment Setup (No Conda)
 Anaconda must be completely disabled for this specific extraction step to prevent background sandbox corruption.
-PowerShell
+# if you dont have python follow this instruction 
+Install a Clean Python 3.12
+Go directly to the official download link: python.org/downloads
+
+Click the yellow Download Python 3.12.x button (or 3.11/3.13).
+
+Open the downloaded .exe installer file.
+
+⚠️ CRITICAL STEP: At the very bottom of the first installation window, check the box that says "Add python.exe to PATH". If you miss this box, Windows will continue to say "Python was not found."
+
+Click Install Now.
+Open Git bash
 # 1. Deactivate conda completely until (base) disappears from your terminal prompt
 conda deactivate
-
 # 2. Create a native Windows Python virtual environment
 python -m venv native_env
 
