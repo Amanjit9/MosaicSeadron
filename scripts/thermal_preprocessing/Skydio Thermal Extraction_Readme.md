@@ -1,4 +1,9 @@
-Skydio Thermal Extraction & SeaDroneLib PipelineThis repository contains the complete environment setup and workflow to process thermal imagery from a Skydio drone (VT300-L sensor) over water surfaces.Because standard photogrammetry (like Pix4D or Agisoft) fails over moving water due to shifting tie-points, this pipeline utilizes SeaDroneLib (MosaicSeadron) to stitch the orthomosaic using Direct Georeferencing (relying on exact GPS and gimbal pitch/roll/yaw metadata instead of visual tie-points).To achieve this without dependency conflicts, the workflow is split into two isolated Python virtual environments:Phase 1 (Python 3.12): Extracts raw 16-bit thermal TIFFs from proprietary Skydio R-JPEGs.Phase 2 (Python 3.10): Stitches the extracted data into an orthomosaic.🛑 General PrerequisitesOS: Windows 10/11Terminal: Git Bash (Highly Recommended)No Conda: Do not use Anaconda/Miniconda, as mixing pip and Conda with spatial libraries like GDAL will cause C-library corruptions.🛠️ Phase 1: Thermal TIFF Extraction (Python 3.12)Because modern FLIR libraries default to a DJI-specific SDK (which rejects Skydio), and legacy FLIR libraries demand outdated dependencies, we must use a "Dependency Smuggle" method.1. ExifTool ConfigurationDownload the Windows Executable .zip from exiftool.org.Extract the .zip file.Move BOTH of these into your project folder:The exiftool(-k).exe launcher (Rename exactly to exiftool.exe).The exiftool_files folder (Contains the required Perl engine).2. Environment SetupInstall Python 3.12 from python.org (ensure "Add to PATH" is checked). Open Git Bash in your project folder and run:# Create and activate the environment
+Skydio Thermal Extraction & SeaDroneLib PipelineThis repository contains the complete environment setup and workflow to process thermal imagery from a Skydio drone (VT300-L sensor) over water surfaces.Because standard photogrammetry (like Pix4D or Agisoft) fails over moving water due to shifting tie-points, this pipeline utilizes SeaDroneLib (MosaicSeadron) to stitch the orthomosaic using Direct Georeferencing (relying on exact GPS and gimbal pitch/roll/yaw metadata instead of visual tie-points).To achieve this without dependency conflicts, the workflow is split into two isolated Python virtual environments:Phase 1 (Python 3.12): Extracts raw 16-bit thermal TIFFs from proprietary Skydio R-JPEGs.Phase 2 (Python 3.10): Stitches the extracted data into an orthomosaic.
+🛑 General PrerequisitesOS: Windows 10/11Terminal: Git Bash (Highly Recommended)No Conda: Do not use Anaconda/Miniconda, as mixing pip and Conda with spatial libraries like GDAL will cause C-library corruptions.
+🛠️ Phase 1: Thermal TIFF Extraction (Python 3.12)Because modern FLIR libraries default to a DJI-specific SDK (which rejects Skydio), and legacy FLIR libraries demand outdated dependencies, we must use a "Dependency Smuggle" method.
+1. ExifTool ConfigurationDownload the Windows Executable .zip from exiftool.org.Extract the .zip file.Move BOTH of these into your project folder:The exiftool(-k).exe launcher (Rename exactly to exiftool.exe).The exiftool_files folder (Contains the required Perl engine).
+2. Environment SetupInstall Python 3.12 from python.org (ensure "Add to PATH" is checked). 
+Open Git Bash in your project folder and run:# Create and activate the environment
 python -m venv native_env
 source native_env/Scripts/activate
 
@@ -30,6 +35,7 @@ python -m pip install rasterio jupyter geopandas
 # Generate and run the SeaDroneLib installation scripts
 python -B scripts/package_manager_generator.py -e seadronelib-venv -p micasense,seadrone -i 1 -ri 1
 bash scripts/install.sh
+
 🚀 Phase 3: Processing the OrthomosaicTo trick SeaDroneLib into processing Skydio imagery, we process it as a "DJI dataset".1. Data StructureEnsure your working folder looks exactly like this:/Your_Project_Folder
   ├── /main             (Contains Skydio R-JPEGs)
   ├── /bands            (Contains extracted TIFFs)
@@ -48,6 +54,8 @@ lines:
     start_img: "S1007806_R.JPG"
     end_img: "S1007836_R.JPG"
   # Repeat for all transects...
-3. Launching the SoftwareWhenever you want to process a new flight, open Git Bash in your MosaicSeadron folder and run:source seadronelib-venv/Scripts/activate
+3. Launching the SoftwareWhenever you want to process a new flight, open Git Bash in your MosaicSeadron folder and
+4. run:source seadronelib-venv/Scripts/activate
 jupyter notebook
-Navigate in your browser to /seadrone_usage/batch_processing_jupyter/dji.ipynb. Update the paths in the notebook to point to your data folder, run the cells, and export your radiometrically accurate thermal orthomosaic!
+Navigate in your browser to /seadrone_usage/batch_processing_jupyter/dji.ipynb.
+Update the paths in the notebook to point to your data folder, run the cells, and export your radiometrically accurate thermal orthomosaic!
