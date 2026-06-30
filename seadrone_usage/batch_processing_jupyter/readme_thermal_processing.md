@@ -15,6 +15,15 @@ bash scripts/install.sh
 
 # activate the environment
 source seadronelib-venv/Scripts/activate
+# check the tag parser and see the list of file name 
+cd D:\Thermal_Mosaic
+
+ls RGB/main | head -5
+
+./exiftool.exe -G -j "RGB/main/S1007780.JPG" > rgb_tags_dump.txt
+
+cat rgb_tags_dump.txt
+
 # Install the packages in an activated environment
 python -m pip install "numpy<1.26.0"
 
