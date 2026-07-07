@@ -30,3 +30,12 @@ python -m pip install "numpy<1.26.0"
 python -m pip install rasterio
 
 jupyter notebook
+# starting all over again for usage
+# Make sure you're in the right directory
+cd /d/Thermal_Mosaic/MosaicSeadron
+
+# Activate the venv
+source seadronelib-venv/Scripts/activate
+
+# Launch Jupyter using the venv's Python directly
+./seadronelib-venv/Scripts/python.exe -m jupyter notebook
