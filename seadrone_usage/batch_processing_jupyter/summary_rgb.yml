@@ -1,0 +1,68 @@
+# SeaDroneLib Flight Metadata Configuration
+# Sensor is deliberately set to 'dji' to utilize the RGB/Thermal dual-folder pipeline
+
+flight_info:
+  sensor: "dji"
+  flight_name: "Skydio_Thermal_Survey_02"
+  altitude_m: 121  # Approximate flight altitude in meters
+
+# Define the straight flight lines (ignore the turns)
+# Use the filenames exactly as they appear in your 'main' folder
+lines:
+  line_1:
+    start_img: "S1007771.JPG"
+    end_img: "S1007801.JPG"
+  
+  line_2:
+    start_img: "S1007804.JPG"
+    end_img: "S1007834.JPG"
+  
+  line_3:
+    start_img: "S1007837.JPG"
+    end_img: "S1007867.JPG"
+
+  line_4:
+    start_img: "S1007870.JPG"
+    end_img: "S1007900.JPG"
+  
+  line_5:
+    start_img: "S1007903.JPG"
+    end_img: "S1007933.JPG"
+  
+  line_6:
+    start_img: "S1007936.JPG"
+    end_img: "S1007966.JPG"
+  line_7:
+    start_img: "S1007969.JPG"
+    end_img: "S1007999.JPG"
+  
+  line_8:
+    start_img: "S1008002.JPG"
+    end_img: "S1008035.JPG"
+  
+  line_9:
+    start_img: "S1008038.JPG"
+    end_img: "S1008071.JPG"
+  line_10:
+    start_img: "S1008074.JPG"
+    end_img: "S1008107.JPG"
+  
+  line_11:
+    start_img: "S1008110.JPG"
+    end_img: "S1008143.JPG"
+  
+  line_12:
+    start_img: "S1008146.JPG"
+    end_img: "S1008179.JPG"
+
+  line_13:
+    start_img: "S1008182.JPG"
+    end_img: "S1008215.JPG"
+  
+  line_14:
+    start_img: "S1008218.JPG"
+    end_img: "S1008251.JPG"
+  
+  line_15:
+    start_img: "S1008254.JPG"
+    end_img: "S1008287.JPG"
